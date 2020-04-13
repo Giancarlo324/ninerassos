@@ -1,2 +1,0 @@
-# ninerassos
-Proyecto universidad
