@@ -2,7 +2,7 @@
 
 Proyecto de la universidad sobre niñeras sos.
 
-**Release 1.0** Instalación:
+**Instalación:** 
 
 Necesitan tener instalado python, **obligatorio.**
 
