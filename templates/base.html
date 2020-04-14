@@ -23,7 +23,7 @@
 
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow" id="mainNav">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow desplegable" id="mainNav">
     <div class="container-fluid">
       <a class="navbar-brand" href="{% url 'home' %}">Niñeras SOS</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -36,11 +36,11 @@
         <ul class="navbar-nav ml-auto">
 
           <li class="nav-item text-black">
-            <a class="nav-link text-black font-weight-bold" href="#">Inicio</a>
+            <a class="nav-link text-black font-weight-bold" href="{% url 'home' %}">Inicio</a>
           </li>
           {% if user.is_authenticated %}
           <li class="nav-item text-black">
-            <a class="nav-link text-black font-weight-bold" href="#">Usuario: {{ user.username }}</a>
+            <a class="nav-link text-black font-weight-bold" href="#">Perfil: {{ user.username }}</a>
           </li>
           <li class="nav-item text-black">
             <a class="nav-link text-black font-weight-bold" href="{% url 'logout' %}">Cerrar sesión</a>
@@ -48,7 +48,11 @@
           {% else %}
           <a class="nav-link text-black font-weight-bold" href="{% url 'login' %}">Iniciar sesión</a>
           <li class="nav-item text-black">
-            <a class="nav-link text-black font-weight-bold" href="#">Registrarse</a>
+            <a class="nav-link text-black font-weight-bold" href="">Registrarse</a>
+            <ul>
+              <li><a href="{% url 'registrar_ninera' %}">Niñera</a></li>
+              <li><a href="{% url 'registrar_cliente' %}">Cliente</a></li>
+            </ul>
           </li>
           {% endif %}
         </ul>
@@ -64,7 +68,7 @@
 
   <!-- Footer -->
   <footer class="py-3 bg-grey">
-    <p class="m-0 text-dark text-center ">Copyright &copy; Niñeras SOS</p>
+    <p class="m-0 text-dark text-center ">{{ perms.blog }}:Copyright &copy; Niñeras SOS</p>
   </footer>
   <!-- bootstrap scripts -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

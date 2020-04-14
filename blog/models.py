@@ -47,3 +47,12 @@ class Ninera(models.Model):
 
 class Cliente(models.Model):
     pass
+
+""" se crearán dos secciones, una para niñera y otra para cliente
+todos van a ser usuarios en la sección de usuarios, pero cada uno
+en el modelo será diferente, el modelo de niñera debe tener una
+relación con el cliente que la contrate.
+Se debe poner un identificador a los usuarios para identificar si
+es niñera o es cliente, depende de eso al pulsar en el propio
+perfil, se redirigirá a su propio modelo depende si es niñera
+o cliente. """

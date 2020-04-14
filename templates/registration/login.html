@@ -2,16 +2,20 @@
 
 {% block content %}
 
-<form action="" method="POST">
-    {% csrf_token %}
 
-    <table>
-        {{ form.as_table }}
-    </table>
+<div class="container">
+    <h2>Autenticación</h2>
+    {% load crispy_forms_tags %}
+    <form action="" method="POST">
+        {% csrf_token %}
 
 
-    <input type="reset" value="Limpiar">
-    <input type="submit" value="Registrar">
-</form>
+        {{ form | crispy }}
+
+
+
+        <input type="submit" value="Iniciar sesión" class="btn btn-success float-right">
+    </form>
+</div>
 
 {%endblock%}
