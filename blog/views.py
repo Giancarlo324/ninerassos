@@ -1,7 +1,9 @@
 from django.views import generic
 from .models import Post
-from .forms import CommentForm
-from django.shortcuts import render, get_object_or_404
+from .forms import CommentForm, CustomUserForm
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required, permission_required
 
 
 class PostList(generic.ListView):
@@ -14,7 +16,7 @@ class PostList(generic.ListView):
 #     model = Post
 #     template_name = 'post_detail.html'
 
-
+@permission_required(('blog.add_comment','blog.change_comment','blog.delete_comment','blog.view_comment'))
 def post_detail(request, slug):
     template_name = "post_detail.html"
     post = get_object_or_404(Post, slug=slug)
@@ -45,3 +47,21 @@ def post_detail(request, slug):
         },
     )
 
+def registrar_ninera(request):
+    data = {
+        'form':CustomUserForm()
+    }
+
+    if request.method == 'POST':
+        formulario = CustomUserForm(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            # Autenticar y redirigir al inicio o cambiar esto más adelante
+            username = formulario.cleaned_data['username']
+            password = formulario.cleaned_data['password1']
+            user =  authenticate(username=username, password=password)
+            login(request, user)
+            return redirect(to='home')
+
+
+    return render(request, 'register/registrarninera.html', data)

@@ -41,3 +41,9 @@ class Comment(models.Model):
 
     def __str__(self):
         return "Comment {} by {}".format(self.body, self.name)
+
+class Ninera(models.Model):
+    pass
+
+class Cliente(models.Model):
+    pass
