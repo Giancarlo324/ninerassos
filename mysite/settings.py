@@ -42,11 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'usuario',
     'crispy_forms',
     'django_summernote',
 ]
 
 INSTALLED_APPS += ( 'django.contrib.sitemaps',)
+AUTH_USER_MODEL = 'usuario.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
