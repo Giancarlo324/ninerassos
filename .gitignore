@@ -4,8 +4,8 @@
 *.pyc
 __pycache__
 db.sqlite3
-blog/migrations*
-usuario/migrations*
+blog/migrations/*
+usuario/migrations/*
 # 
 *.env
 
