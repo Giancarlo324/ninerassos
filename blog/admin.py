@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import Post, Comment
+from .models import Hojavida, Comment
 from usuario.models import User
 
 from django_summernote.admin import SummernoteModelAdmin
 
-class PostAdmin(SummernoteModelAdmin):
+class HojavidaAdmin(SummernoteModelAdmin):
     list_display = ('title', 'slug', 'status', 'created_on')
     list_filter = ('status', 'created_on')
     search_fields = ['title', 'content']
@@ -24,5 +24,5 @@ class CommentAdmin(admin.ModelAdmin):
         queryset.update(active=True)
 
 
-admin.site.register(Post, PostAdmin)
+admin.site.register(Hojavida, HojavidaAdmin)
 admin.site.register(User)
