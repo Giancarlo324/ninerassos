@@ -1,25 +1,40 @@
 from django.views import generic
-from .models import Post
+from .models import Hojavida
 from .forms import CommentForm, CustomUserForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required
+from usuario.models import User
 
 
 class PostList(generic.ListView):
-    queryset = Post.objects.filter(status=1).order_by("-created_on")
+    queryset = Hojavida.objects.filter(status=1).order_by("-created_on")
     template_name = "index.html"
     paginate_by = 3
+
+class NinerasList(generic.ListView):
+    queryset = Hojavida.objects.filter(status=1).order_by("-created_on")
+    template_name = "index.html"
+    paginate_by = 3
+
+def listado_nineras(request):
+    nineras = User.objects.all()
+    data = {
+        'nineras': nineras
+    }
+    return render(request, "index.html", data)
 
 
 # class PostDetail(generic.DetailView):
 #     model = Post
 #     template_name = 'post_detail.html'
 
-@permission_required(('blog.view_comment'))
+def page404(request):
+    return render(request, '404.html')
+
 def post_detail(request, slug):
     template_name = "post_detail.html"
-    post = get_object_or_404(Post, slug=slug)
+    post = get_object_or_404(Hojavida, slug=slug)
     comments = post.comments.filter(active=True).order_by("-created_on")
     new_comment = None
     # Comment posted

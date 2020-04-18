@@ -24,7 +24,25 @@
 
     <!-- Blog Entries Column -->
     <div class="col-md-8 mt-3 left">
-      {% for post in post_list %}
+      <table>
+        <tr>
+          <th>Hola1</th>
+          <th>Hola2</th>
+        </tr>
+        {% for ninera in nineras %}
+        {% if ninera.is_ninera %}
+
+        <tr>
+          <td>{{ ninera.username }}</td>
+        </tr>
+        
+        {% endif %}
+
+        {% endfor %}
+      </table>
+      
+      
+      {% for post in hojavida_list %}
       <div class="card mb-4">
         <div class="card-body">
           <h2 class="card-title">{{ post.title }}</h2>
@@ -36,6 +54,7 @@
 
       </div>
       {% endfor %}
+      <!-- -->
 
     </div>
     {% block sidebar %}

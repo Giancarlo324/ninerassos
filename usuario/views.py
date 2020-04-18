@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 
 
-
 # Create your views here.
 def registrar_ninera(request):
     data = {
@@ -51,6 +50,53 @@ def registrar_cliente(request):
 
 
     return render(request, 'registration/registrarcliente.html', data)
+
+
+def profile_ninera(request):
+    user = request.user
+    hola = "ninera"
+
+    if user.is_ninera:
+        profile = user.get_ninera_profile()
+        # Tal vez el doctor es nuevo y no tiene perfil
+        if profile:
+            print("Hola1")
+            return render(request, 'profileninera.html', {
+            "hola": hola
+        })
+        else:
+            print("Hola2")
+            return render(request, 'profileninera.html', {
+            "hola": hola
+        })
+            # Redireccionar, levantar un error, etc.
+    else:
+        return render(request, '404.html')
+        # Redireccionar, levantar un error, etc.
+
+
+def profile_cliente(request):
+    user = request.user
+    hola = "clienteee"
+
+    if user.is_cliente:
+        profile = user.get_cliente_profile()
+        # Tal vez el doctor es nuevo y no tiene perfil
+        if profile:
+            print("Hola1")
+            return render(request, 'profilecliente.html', {
+            "hola": hola
+        })
+            # Mas código
+        else:
+            print("Hola2")
+            return render(request, 'profilecliente.html', {
+            "hola": hola
+        })
+            # Redireccionar, levantar un error, etc.
+    else:
+        return render(request, '404.html')
+        # Redireccionar, levantar un error, etc.
     
 
 def crear_historia_clinica(request):
