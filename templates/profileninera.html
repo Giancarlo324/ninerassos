@@ -3,5 +3,25 @@
 {% load crispy_forms_tags %}
 
 {{ hola }}
+{% if user.tiene_hoja_vida %}
+
+
+Tienes hoja de vida
+
+{% else %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+
+
+    {{ form | crispy }}
+
+
+    <input type="submit" value="Registrar">
+
+</form>
+
+{% endif %}
+{{ mensaje }}
 
 {% endblock content %}

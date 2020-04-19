@@ -22,6 +22,8 @@ urlpatterns = [
     path("profileninera/", usuario_view.profile_ninera, name="profile_ninera"),
     path("profilecliente/", usuario_view.profile_cliente, name="profile_cliente"),
 
+    # path("profileninera/", views.crear_hoja_vida, name="crear_hoja_vida"),
+
 
     path("feed/rss", LatestPostsFeed(), name="post_feed"),
     path("feed/atom", AtomSiteNewsFeed()),

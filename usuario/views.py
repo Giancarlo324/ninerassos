@@ -1,6 +1,8 @@
-from blog.forms import CustomUserForm
+from blog.forms import CustomUserForm, HojaVidaForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
+from .models import User
+from blog.models import Hojavida
 
 
 # Create your views here.
@@ -15,6 +17,7 @@ def registrar_ninera(request):
             user = formulario.save()
             user.refresh_from_db()
             user.is_ninera = True
+            user.ninera_disponible = True
             user.save()
             # formulario.save()
             # Autenticar y redirigir al inicio o cambiar esto más adelante
@@ -53,22 +56,50 @@ def registrar_cliente(request):
 
 
 def profile_ninera(request):
+    new_hoja_vida = None
     user = request.user
     hola = "ninera"
+    usuario = User.objects.get(id = user.id)
+
 
     if user.is_ninera:
         profile = user.get_ninera_profile()
-        # Tal vez el doctor es nuevo y no tiene perfil
+        # Tal vez la niñera es nueva y no tiene perfil
         if profile:
             print("Hola1")
-            return render(request, 'profileninera.html', {
-            "hola": hola
-        })
+            data = {
+                'form':HojaVidaForm()
+            }
+            if request.method == 'POST':
+                formulario = HojaVidaForm(request.POST)
+                if formulario.is_valid():
+                    formulario.save()
+                    data['mensaje'] = "Registrado correctamente"
+            return render(request, 'profileninera.html', data)
         else:
             print("Hola2")
-            return render(request, 'profileninera.html', {
-            "hola": hola
-        })
+            print("Hola2"+str(user.id))
+            data = {
+                'form':HojaVidaForm(instance=usuario)
+            }
+            if request.method == 'POST':
+                formulario = HojaVidaForm(request.POST)
+                if formulario.is_valid():
+                    # Actualizar a que ya tiene hoja de vida
+                    actualizacion = User.objects.get(id = user.id)
+                    User.objects.filter(pk=user.id).update(tiene_hoja_vida=True)
+                    actualizacion.refresh_from_db()
+                    # Guardar
+                    """hoja_vida = formulario.save()
+                    hoja_vida.refresh_from_db()
+                    hoja_vida.usuario = Hojavida.objects.get(id=user.id)"""
+                    # hoja_vida.usuario = user
+                    # hoja_vida.save()
+                    formulario.save()
+                    data['mensaje'] = "Registrado correctamente"
+                    return redirect(to='home')
+
+            return render(request, 'profileninera.html', data)
             # Redireccionar, levantar un error, etc.
     else:
         return render(request, '404.html')

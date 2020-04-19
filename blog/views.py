@@ -1,6 +1,6 @@
 from django.views import generic
 from .models import Hojavida
-from .forms import CommentForm, CustomUserForm
+from .forms import CommentForm, CustomUserForm, HojaVidaForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
@@ -16,6 +16,7 @@ class NinerasList(generic.ListView):
     queryset = Hojavida.objects.filter(status=1).order_by("-created_on")
     template_name = "index.html"
     paginate_by = 3
+    
 
 def listado_nineras(request):
     nineras = User.objects.all()
