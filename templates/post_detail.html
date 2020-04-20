@@ -9,6 +9,20 @@
         <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
         <p class=" text-muted">{{ post.first_name }} | {{ post.created_on }}</p>
         <p class="card-text ">{{ post.content | safe }}</p>
+        {% if post.usuario.ninera_disponible %}
+        <a href="#" class="btn btn-success">Disponible</a>
+        <input class="btn btn-primary" type="button" value="Mostrar información" onclick="mostrar();">
+        {% else %}
+        <a href="#" class="btn btn-danger">No disponible</a>
+        {% endif %}
+      </div>
+      <div class="card-body" id="mostrarOcultar">
+        <h1>Información</h1>
+        <p class="card-text">{{ post.first_name }}</p>
+        <p class="card-text">{{ post.num_telefono }}</p>
+        <p class="card-text">{{ post.residencia }}</p>
+        <p class="card-text">{{ post.email }}</p>
+        <input class="btn btn-danger" type="button" value="Ocultar información" onclick="ocultar();">
       </div>
     </div>
     {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
@@ -36,11 +50,13 @@
         {% endfor %}
       </div>
     </div>
+    {% if user.is_cliente %}
     <div class="col-md-8 card mb-4  mt-3 ">
       <div class="card-body">
         {% if new_comment %}
         <div class="alert alert-success" role="alert">
-          Tu comentario está en revisión
+          Comentario publicado
+          <!--Tu comentario está en revisión-->
         </div>
         {% else %}
         <h3>Dejar un comentario</h3>
@@ -52,7 +68,22 @@
         {% endif %}
       </div>
     </div>
+    {% endif %}
   </div>
 </div>
 
+<div class="modal fade" id="venana_modal" role="dialog">
+
+</div>
+
 {% endblock content %}
+{% block extra %}
+<script type="text/javascript">
+  function ocultar(){
+    document.getElementById('mostrarOcultar').style.display="none";
+  }
+  function mostrar(){
+    document.getElementById('mostrarOcultar').style.display="block";
+  }
+  </script>
+  {% endblock extra %}

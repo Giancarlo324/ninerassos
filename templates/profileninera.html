@@ -4,12 +4,31 @@
 
 {{ hola }}
 {% if user.tiene_hoja_vida %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 card mb-4 mt-3 left top">
+            <div class="card-body">
+
+                <h1>Estado actual: {% if user.ninera_disponible %} Disponible {% else %} Ocupada {% endif %}</h1>
+
+            
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
 
 
-Tienes hoja de vida
+                {{ form | crispy }}
+
+
+                <input type="submit" value="Actualizar" class="btn btn-success">
+
+            </form>
+        </div>
+
+        </div>
+    </div>
+</div>
 
 {% else %}
-
 <form action="" method="POST">
     {% csrf_token %}
 
@@ -17,7 +36,7 @@ Tienes hoja de vida
     {{ form | crispy }}
 
 
-    <input type="submit" value="Registrar">
+    <input type="submit" value="Registrar" class="btn btn-success">
 
 </form>
 

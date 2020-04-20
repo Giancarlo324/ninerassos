@@ -9,7 +9,7 @@
 <head>
   <title>Niñeras SOS</title>
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
 
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
   <meta name="google" content="notranslate" />
@@ -39,22 +39,24 @@
             <a class="nav-link text-black font-weight-bold" href="{% url 'home' %}">Inicio</a>
           </li>
           {% if user.is_authenticated %}
-            {% if user.is_ninera %}
-            <li class="nav-item text-black">
-              <a class="nav-link text-black font-weight-bold" href="{% url 'profile_ninera' %}">Perfil: {{ user.username }}</a>
-            </li>
-            {% else %}
-            <li class="nav-item text-black">
-              <a class="nav-link text-black font-weight-bold" href="{% url 'profile_cliente' %}">Perfil: {{ user.username }}</a>
-            </li>
-            {% endif %}
+          {% if user.is_ninera %}
+          <li class="nav-item text-black">
+            <a class="nav-link text-black font-weight-bold" href="{% url 'profile_ninera' %}">Perfil:
+              {{ user.username }}</a>
+          </li>
+          {% else %}
+          <li class="nav-item text-black">
+            <a class="nav-link text-black font-weight-bold" href="{% url 'profile_cliente' %}">Perfil:
+              {{ user.username }}</a>
+          </li>
+          {% endif %}
           <li class="nav-item text-black">
             <a class="nav-link text-black font-weight-bold" href="{% url 'logout' %}">Cerrar sesión</a>
           </li>
           {% else %}
           <a class="nav-link text-black font-weight-bold" href="{% url 'login' %}">Iniciar sesión</a>
           <li class="nav-item text-black">
-            <a class="nav-link text-black font-weight-bold" href="">Registrarse</a>
+            <a class="nav-link text-black font-weight-bold" href="#">Registrarse</a>
             <ul>
               <li><a href="{% url 'registrar_ninera' %}">Niñera</a></li>
               <li><a href="{% url 'registrar_cliente' %}">Cliente</a></li>
@@ -77,18 +79,19 @@
     <p class="m-0 text-dark text-center ">Copyright &copy; Niñeras SOS</p>
   </footer>
   <!-- bootstrap scripts -->
+
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-  </script>
+    </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-  </script>
+    </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-  </script>
+    </script>
+
+  {% block extra %}
+  {% endblock extra %}
 </body>
-
-
-
 
 </html>

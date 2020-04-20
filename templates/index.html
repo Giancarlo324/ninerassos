@@ -24,24 +24,6 @@
 
     <!-- Blog Entries Column -->
     <div class="col-md-8 mt-3 left">
-      <table>
-        <tr>
-          <th>Hola1</th>
-          <th>Hola2</th>
-        </tr>
-        {% for ninera in nineras %}
-        {% if ninera.is_ninera %}
-
-        <tr>
-          <td>{{ ninera.username }}</td>
-        </tr>
-        
-        {% endif %}
-
-        {% endfor %}
-      </table>
-      
-      
       {% for post in hojavida_list %}
       <div class="card mb-4">
         <div class="card-body">
@@ -50,10 +32,10 @@
 
           <p class="card-text">{{ post.content|slice:":200" }}</p>
           <a href="{% url 'post_detail' post.slug  %}" class="btn btn-primary">Leer más &rarr;</a>
-          {% if user.ninera_disponible %}
+          {% if post.usuario.ninera_disponible %}
             <a href="{% url 'post_detail' post.slug  %}" class="btn btn-success">Disponible</a>
           {% else %}
-            <a href="{% url 'post_detail' post.slug  %}" class="btn btn-danger">No disponible</a>
+            <a href="#" class="btn btn-danger">No disponible</a>
           {% endif %}
         </div>
 

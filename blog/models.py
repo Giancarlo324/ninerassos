@@ -15,7 +15,7 @@ STATUS = ((0, "Draft"), (1, "Publish"))
 class Hojavida(models.Model):
     id = models.IntegerField("Identificación", primary_key=True, unique=True)
     # Si un usuario se elimine, también se hará la relación hojavida
-    # usuario = models.OneToOneField(User, on_delete=models.CASCADE, null=False, blank=False)
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, null=False, blank=False)
     # con models.CASCADE
     # Se obliga a que hoja vida tenga relación con User.
     first_name = models.CharField("Nombres", max_length=255)
@@ -28,6 +28,12 @@ class Hojavida(models.Model):
     )
     sex = models.CharField("Sexo", max_length=10, choices=SEX)
     email = models.EmailField("email", unique=True, max_length=255)
+    num_telefono = models.IntegerField("Celular")
+    residencia = models.CharField("Dirección de residencia", max_length=255)
+    habilidades = models.TextField("Habilidades y aptitudes")
+    experiencia_lab = models.TextField("Experiencia laboral")
+    formacion = models.TextField("Formación")
+
 
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True, blank=True)

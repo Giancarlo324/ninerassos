@@ -12,11 +12,12 @@ class PostList(generic.ListView):
     template_name = "index.html"
     paginate_by = 3
 
+
 class NinerasList(generic.ListView):
     queryset = Hojavida.objects.filter(status=1).order_by("-created_on")
     template_name = "index.html"
     paginate_by = 3
-    
+
 
 def listado_nineras(request):
     nineras = User.objects.all()
@@ -33,6 +34,8 @@ def listado_nineras(request):
 def page404(request):
     return render(request, '404.html')
 
+
+@login_required
 def post_detail(request, slug):
     template_name = "post_detail.html"
     post = get_object_or_404(Hojavida, slug=slug)
@@ -47,6 +50,7 @@ def post_detail(request, slug):
             new_comment = comment_form.save(commit=False)
             # Assign the current post to the comment
             new_comment.post = post
+            new_comment.active = True
             # Save the comment to the database
             new_comment.save()
     else:

@@ -2,6 +2,12 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
+
+Tienes una sesión activa
+
+{% else %}
+
 <div class="container">
     <h2>
         Registro de Cliente
@@ -20,5 +26,7 @@
         </div>
     </form>
 </div>
+
+{% endif %}
 
 {%endblock%}

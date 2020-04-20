@@ -1,3 +1,4 @@
+from django.contrib.auth.forms import UsernameField
 from django.contrib.auth.forms import UserCreationForm
 from .models import Comment, Hojavida
 from django import forms
@@ -18,6 +19,12 @@ class CustomUserForm(UserCreationForm):
         fields = ['id', 'first_name', 'last_name', 'email',
                   'username', 'password1', 'password2']
 
+class CambiarEstadoForm(forms.ModelForm):
+    #username = UsernameField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-sm'}))
+    class Meta:
+        model = User
+        fields = ['ninera_disponible']
+
 
 class HojaVidaForm(forms.ModelForm):
     class Meta:
@@ -28,5 +35,10 @@ class HojaVidaForm(forms.ModelForm):
                   'birth_date',
                   'sex',
                   'email',
+                  'num_telefono',
+                  'residencia',
+                  'habilidades',
+                  'experiencia_lab',
+                  'formacion',
                   'title',
                   'content']

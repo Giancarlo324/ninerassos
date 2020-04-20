@@ -1,4 +1,4 @@
-from blog.forms import CustomUserForm, HojaVidaForm
+from blog.forms import CustomUserForm, HojaVidaForm, CambiarEstadoForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from .models import User
@@ -8,7 +8,7 @@ from blog.models import Hojavida
 # Create your views here.
 def registrar_ninera(request):
     data = {
-        'form':CustomUserForm()
+        'form': CustomUserForm()
     }
 
     if request.method == 'POST':
@@ -17,23 +17,25 @@ def registrar_ninera(request):
             user = formulario.save()
             user.refresh_from_db()
             user.is_ninera = True
-            user.ninera_disponible = True
+            user.ninera_disponible = False
             user.save()
             # formulario.save()
             # Autenticar y redirigir al inicio o cambiar esto más adelante
             username = formulario.cleaned_data['username']
             password = formulario.cleaned_data['password1']
-            user =  authenticate(username=username, password=password)
+            user = authenticate(username=username, password=password)
             login(request, user)
             return redirect(to='home')
+        else:
+            data['mensaje'] = "Ocurrió un error"
 
     return render(request, 'registration/registrarninera.html', data)
-    
+
 
 def registrar_cliente(request):
-    
+
     data = {
-        'form':CustomUserForm()
+        'form': CustomUserForm()
     }
 
     if request.method == 'POST':
@@ -47,10 +49,11 @@ def registrar_cliente(request):
             # Autenticar y redirigir al inicio o cambiar esto más adelante
             username = formulario.cleaned_data['username']
             password = formulario.cleaned_data['password1']
-            user =  authenticate(username=username, password=password)
+            user = authenticate(username=username, password=password)
             login(request, user)
             return redirect(to='home')
-
+        else:
+            data['mensaje'] = "Ocurrió un error"
 
     return render(request, 'registration/registrarcliente.html', data)
 
@@ -59,8 +62,7 @@ def profile_ninera(request):
     new_hoja_vida = None
     user = request.user
     hola = "ninera"
-    usuario = User.objects.get(id = user.id)
-
+    usuario = User.objects.get(id=user.id)
 
     if user.is_ninera:
         profile = user.get_ninera_profile()
@@ -68,39 +70,60 @@ def profile_ninera(request):
         if profile:
             print("Hola1")
             data = {
-                'form':HojaVidaForm()
+                'form': HojaVidaForm()
             }
             if request.method == 'POST':
                 formulario = HojaVidaForm(request.POST)
                 if formulario.is_valid():
                     formulario.save()
                     data['mensaje'] = "Registrado correctamente"
+                else:
+                    data['mensaje'] = "Ocurrió un error"
             return render(request, 'profileninera.html', data)
         else:
             print("Hola2")
             print("Hola2"+str(user.id))
-            data = {
-                'form':HojaVidaForm(instance=usuario)
-            }
-            if request.method == 'POST':
-                formulario = HojaVidaForm(request.POST)
-                if formulario.is_valid():
-                    # Actualizar a que ya tiene hoja de vida
-                    actualizacion = User.objects.get(id = user.id)
-                    User.objects.filter(pk=user.id).update(tiene_hoja_vida=True)
-                    actualizacion.refresh_from_db()
-                    # Guardar
-                    """hoja_vida = formulario.save()
-                    hoja_vida.refresh_from_db()
-                    hoja_vida.usuario = Hojavida.objects.get(id=user.id)"""
-                    # hoja_vida.usuario = user
-                    # hoja_vida.save()
-                    formulario.save()
-                    data['mensaje'] = "Registrado correctamente"
-                    return redirect(to='home')
+            # Si está disponible, es porque ya llenó la hoja de vida
+            if user.tiene_hoja_vida:
+                data = {'form': CambiarEstadoForm(instance=usuario)}
+                if request.method == 'POST':
+                    formulario = CambiarEstadoForm(
+                        request.POST, instance=request.user)
+                    if formulario.is_valid():
+                        modificar_estado = formulario.save(commit=False)
+                        modificar_estado.save()
+                        # actualizacion = User.objects.get(id = user.id)
+                        # formulario.save()
+                        data['mensaje'] = "Registrado correctamente"
+                        return redirect(to='profile_ninera')
+                    else:
+                        data['mensaje'] = "Ocurrió un error"
+                return render(request, 'profileninera.html', data)
+            else:
+                data = {
+                    'form': HojaVidaForm(instance=usuario)
+                }
+                if request.method == 'POST':
+                    formulario = HojaVidaForm(request.POST)
+                    if formulario.is_valid():
+                        # Actualizar a que ya tiene hoja de vida y ninera disponible
+                        actualizacion = User.objects.get(id=user.id)
+                        User.objects.filter(pk=user.id).update(
+                            tiene_hoja_vida=True)
+                        User.objects.filter(pk=user.id).update(
+                            ninera_disponible=True)
+                        actualizacion.refresh_from_db()
+                        # Guardar
+                        hoja_vida = formulario.save(commit=False)
+                        hoja_vida.usuario = User.objects.get(id=user.id)
+                        hoja_vida.save()
+                        data['mensaje'] = "Registrado correctamente"
+                        return redirect(to='home')
+                    else:
+                        data['mensaje'] = "Ocurrió un error"
 
-            return render(request, 'profileninera.html', data)
-            # Redireccionar, levantar un error, etc.
+                return render(request, 'profileninera.html', data)
+                # Redireccionar, levantar un error, etc.
     else:
         return render(request, '404.html')
         # Redireccionar, levantar un error, etc.
@@ -116,19 +139,19 @@ def profile_cliente(request):
         if profile:
             print("Hola1")
             return render(request, 'profilecliente.html', {
-            "hola": hola
-        })
+                "hola": hola
+            })
             # Mas código
         else:
             print("Hola2")
             return render(request, 'profilecliente.html', {
-            "hola": hola
-        })
+                "hola": hola
+            })
             # Redireccionar, levantar un error, etc.
     else:
         return render(request, '404.html')
         # Redireccionar, levantar un error, etc.
-    
+
 
 def crear_historia_clinica(request):
     user = request.user
@@ -144,6 +167,7 @@ def crear_historia_clinica(request):
     else:
         print("Hola3")
         # Redireccionar, levantar un error, etc.
+
 
 def solo_para_clientes(request):
     user = request.user
