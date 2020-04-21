@@ -13,6 +13,8 @@ class User(AbstractUser):
     is_cliente = models.BooleanField(default=False)
     tiene_hoja_vida = models.BooleanField(default=False)
     ninera_disponible = models.BooleanField(default=False)
+    """inicio_suscripcion = models.DateField("Inicio de suscripción")
+    fin_suscripcion = models.DateField("Fiin de suscripción")"""
 
     def get_ninera_profile(self):
         ninera_profile = None

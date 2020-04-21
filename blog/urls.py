@@ -9,7 +9,7 @@ urlpatterns = [
 
     # Home
     #path("", views.listado_nineras, name="home"),
-    path("", views.NinerasList.as_view(), name="home"),
+    path("", views.listado_post, name="home"),
 
     # 404
     path("page404/", views.page404, name="page404"),

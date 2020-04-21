@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from usuario.models import User
+from datetime import datetime, timedelta
 
 
 STATUS = ((0, "Draft"), (1, "Publish"))
@@ -10,6 +11,9 @@ STATUS = ((0, "Draft"), (1, "Publish"))
 # Una hoja de vida le pertenece a un usuario
 # Una hoja de vida no puede existir sin un usuario
 # OneToOneFiel
+
+def now_plus_30():
+    return datetime.now() + timedelta(days = 30)
 
 
 class Hojavida(models.Model):
@@ -34,7 +38,8 @@ class Hojavida(models.Model):
     experiencia_lab = models.TextField("Experiencia laboral")
     formacion = models.TextField("Formación")
 
-
+    fecha_inicio = models.DateTimeField("Inicio de suscripción", auto_now_add=True)
+    fecha_fin = models.DateTimeField("Fin de suscripción", default=now_plus_30)
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     updated_on = models.DateTimeField(auto_now=True)

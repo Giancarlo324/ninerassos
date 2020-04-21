@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from .models import User
 from blog.models import Hojavida
+from datetime import datetime, timedelta
 
 
 # Create your views here.
@@ -83,9 +84,11 @@ def profile_ninera(request):
         else:
             print("Hola2")
             print("Hola2"+str(user.id))
+            post = Hojavida.objects.get(id=user.id)
+            #
             # Si está disponible, es porque ya llenó la hoja de vida
             if user.tiene_hoja_vida:
-                data = {'form': CambiarEstadoForm(instance=usuario)}
+                data = {'form': CambiarEstadoForm(instance=usuario), 'post':post,}
                 if request.method == 'POST':
                     formulario = CambiarEstadoForm(
                         request.POST, instance=request.user)

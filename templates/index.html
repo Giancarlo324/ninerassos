@@ -31,6 +31,7 @@
           <p class="card-text text-muted h6">{{ post.first_name }} | {{ post.created_on}}  </p>
 
           <p class="card-text">{{ post.content|slice:":200" }}</p>
+          <p class="card-text">Esto: {{ post.fecha_fin }}</p>
           <a href="{% url 'post_detail' post.slug  %}" class="btn btn-primary">Leer más &rarr;</a>
           {% if post.usuario.ninera_disponible %}
             <a href="{% url 'post_detail' post.slug  %}" class="btn btn-success">Disponible</a>
@@ -49,18 +50,25 @@
     {% endblock sidebar %}
   </div>
 </div>
-{% if is_paginated %}
+
 <nav aria-label="Page navigation conatiner"></nav>
 <ul class="pagination justify-content-center">
-  {% if page_obj.has_previous %}
-  <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; Anterior </a></li>
+  {% if hojavida_list.has_previous %}
+  <li><a href="?page={{ hojavida_list.previous_page_number }}" class="page-link">&laquo; Anterior </a></li>
   {% endif %}
-  {% if page_obj.has_next %}
-  <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> Siguiente &raquo;</a></li>
+  {% for pg in hojavida_list.paginator.page_range %}
+  {% if hojavida_list.number == pg %}
+  <li class="page-item active"><a href="?page={{ pg }}" class="page-link">{{ pg }}</a></li>
+  {% else %}
+  <li class="page-item"><a href="?page={{ pg }}" class="page-link">{{ pg }}</a></li>
+  {% endif %}
+  {% endfor %}
+  {% if hojavida_list.has_next %}
+  <li><a href="?page={{ hojavida_list.next_page_number }}" class="page-link"> Siguiente &raquo;</a></li>
 
   {% endif %}
 </ul>
 </nav>
 </div>
-{% endif %}
+
 {%endblock%}

@@ -9,21 +9,21 @@
         <div class="col-md-8 card mb-4 mt-3 left top">
             <div class="card-body">
 
-                <h1>Estado actual: {% if user.ninera_disponible %} Disponible {% else %} Ocupada {% endif %}</h1>
+                <h1>Estado actual: {% if user.ninera_disponible %} <input type="submit" value="Disponible" class="btn btn-success"> {% else %} Ocupada {% endif %}</h1>
 
-            
-            <form action="" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
 
+                    {{ form | crispy }}
 
-                {{ form | crispy }}
+                    <input type="submit" value="Actualizar estado" class="btn btn-danger">
+                </form>
 
+                <h1>Suscripción</h1>
 
-                <input type="submit" value="Actualizar" class="btn btn-success">
-
-            </form>
-        </div>
-
+                <b>Fecha de suscripción: </b> {{ post.fecha_inicio }} <br>
+                <b>Fecha fin de suscripción: </b> {{ post.fecha_fin }}
+            </div>
         </div>
     </div>
 </div>
@@ -32,12 +32,9 @@
 <form action="" method="POST">
     {% csrf_token %}
 
-
     {{ form | crispy }}
 
-
     <input type="submit" value="Registrar" class="btn btn-success">
-
 </form>
 
 {% endif %}

@@ -16,6 +16,7 @@
         <a href="#" class="btn btn-danger">No disponible</a>
         {% endif %}
       </div>
+      {% if post.usuario.ninera_disponible %}
       <div class="card-body" id="mostrarOcultar">
         <h1>Información</h1>
         <p class="card-text">{{ post.first_name }}</p>
@@ -24,6 +25,7 @@
         <p class="card-text">{{ post.email }}</p>
         <input class="btn btn-danger" type="button" value="Ocultar información" onclick="ocultar();">
       </div>
+      {% endif %}
     </div>
     {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
 

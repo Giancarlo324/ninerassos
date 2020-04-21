@@ -5,6 +5,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from usuario.models import User
+from datetime import datetime, timedelta
+from django.core.paginator import Paginator
 
 
 class PostList(generic.ListView):
@@ -17,6 +19,46 @@ class NinerasList(generic.ListView):
     queryset = Hojavida.objects.filter(status=1).order_by("-created_on")
     template_name = "index.html"
     paginate_by = 3
+    #
+    #
+
+def listado_post(request):
+    postAll = Hojavida.objects.all()
+    post = Hojavida.objects.filter(status=1).order_by("-created_on")
+    paginator = Paginator(post, 5)
+    try:
+        page = int(request.GET.get('page',1))
+    except:
+        page = 1
+
+    try:
+        posts = paginator.page(page)
+    except(EmptyPage, InvalidPage):
+        posts = paginator.page(paginator.num_pages)
+    #
+
+    for activo in postAll:
+        #
+        print("Fechaaaa finnnnnnn: "+str(activo.fecha_fin))
+        print("Fecha hoyyyyyyyy: "+str(datetime.now()))
+        a = int(datetime.now().strftime('%Y%m%d%H%M%S'))
+        b = int(activo.fecha_fin.strftime('%Y%m%d%H%M%S'))
+        print("Este es el día de hoy: "+str(a))
+        print("Este es el día en que acaba: "+str(b))
+        if a >= b:
+            print("Cambio a sin suscripción, hoy mayor que fin")
+            Hojavida.objects.filter(pk=activo.usuario.id).update(status=0)
+            activo.refresh_from_db()
+        else:
+            print("Cambio a con suscripción, fin mayor que hoy")
+            Hojavida.objects.filter(pk=activo.usuario.id).update(status=1)
+            activo.refresh_from_db()
+        #
+    #
+    data = {
+        'hojavida_list': posts
+    }
+    return render(request, "index.html", data)
 
 
 def listado_nineras(request):
