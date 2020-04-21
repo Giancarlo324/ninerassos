@@ -24,7 +24,7 @@ class NinerasList(generic.ListView):
 
 def listado_post(request):
     postAll = Hojavida.objects.all()
-    post = Hojavida.objects.filter(status=1).order_by("-created_on")
+    post = Hojavida.objects.filter(status=1, suscripcion=1).order_by("-created_on")
     paginator = Paginator(post, 5)
     try:
         page = int(request.GET.get('page',1))
@@ -47,11 +47,11 @@ def listado_post(request):
         print("Este es el día en que acaba: "+str(b))
         if a >= b:
             print("Cambio a sin suscripción, hoy mayor que fin")
-            Hojavida.objects.filter(pk=activo.usuario.id).update(status=0)
+            Hojavida.objects.filter(pk=activo.usuario.id).update(suscripcion=0)
             activo.refresh_from_db()
         else:
             print("Cambio a con suscripción, fin mayor que hoy")
-            Hojavida.objects.filter(pk=activo.usuario.id).update(status=1)
+            Hojavida.objects.filter(pk=activo.usuario.id).update(suscripcion=1)
             activo.refresh_from_db()
         #
     #
@@ -67,11 +67,6 @@ def listado_nineras(request):
         'nineras': nineras
     }
     return render(request, "index.html", data)
-
-
-# class PostDetail(generic.DetailView):
-#     model = Post
-#     template_name = 'post_detail.html'
 
 def page404(request):
     return render(request, '404.html')

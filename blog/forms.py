@@ -19,6 +19,31 @@ class CustomUserForm(UserCreationForm):
         fields = ['id', 'first_name', 'last_name', 'email',
                   'username', 'password1', 'password2']
 
+    def clean_id(self):
+        id = self.cleaned_data.get('id')
+        
+        for instance in User.objects.all():
+            if instance.id == id:
+                print("Ya esta registrada")
+                raise forms.ValidationError("La identificación "+str(id)+" ya se encuentra registrada.")
+        return id
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        
+        for instance in User.objects.all():
+            if instance.email == email:
+                print("Ya esta registrada")
+                raise forms.ValidationError("El email "+str(email)+" ya se encuentra registrado.")
+        return email
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        
+        for instance in User.objects.all():
+            if instance.username == username:
+                print("Ya esta registrada")
+                raise forms.ValidationError("El usuario "+str(username)+" ya se encuentra registrado.")
+        return username
+
 class CambiarEstadoForm(forms.ModelForm):
     #username = UsernameField(widget = forms.TextInput(attrs = {'class': 'form-control form-control-sm'}))
     class Meta:
@@ -42,3 +67,10 @@ class HojaVidaForm(forms.ModelForm):
                   'formacion',
                   'title',
                   'content']
+
+    def clean_num_telefono(self):
+        num_telefono = self.cleaned_data.get('num_telefono')
+        
+        if len(str(num_telefono)) != 10:
+            raise forms.ValidationError("El número de celular "+str(num_telefono)+" es incorrecto.")
+        return num_telefono

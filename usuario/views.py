@@ -8,10 +8,6 @@ from datetime import datetime, timedelta
 
 # Create your views here.
 def registrar_ninera(request):
-    data = {
-        'form': CustomUserForm()
-    }
-
     if request.method == 'POST':
         formulario = CustomUserForm(request.POST)
         if formulario.is_valid():
@@ -26,19 +22,17 @@ def registrar_ninera(request):
             password = formulario.cleaned_data['password1']
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect(to='home')
-        else:
-            data['mensaje'] = "Ocurrió un error"
+            return redirect(to='profile_ninera')
+    else:
+        formulario = CustomUserForm()
 
+    data = {
+        'form': formulario
+    }
     return render(request, 'registration/registrarninera.html', data)
 
 
 def registrar_cliente(request):
-
-    data = {
-        'form': CustomUserForm()
-    }
-
     if request.method == 'POST':
         formulario = CustomUserForm(request.POST)
         if formulario.is_valid():
@@ -53,9 +47,12 @@ def registrar_cliente(request):
             user = authenticate(username=username, password=password)
             login(request, user)
             return redirect(to='home')
-        else:
-            data['mensaje'] = "Ocurrió un error"
+    else:
+        formulario = CustomUserForm()
 
+    data = {
+        'form': formulario
+    }
     return render(request, 'registration/registrarcliente.html', data)
 
 
@@ -102,10 +99,8 @@ def profile_ninera(request):
                     else:
                         data['mensaje'] = "Ocurrió un error"
                 return render(request, 'profileninera.html', data)
-            else:
-                data = {
-                    'form': HojaVidaForm(instance=usuario)
-                }
+            else: # No tiene hoja de vida
+                
                 if request.method == 'POST':
                     formulario = HojaVidaForm(request.POST)
                     if formulario.is_valid():
@@ -120,16 +115,19 @@ def profile_ninera(request):
                         hoja_vida = formulario.save(commit=False)
                         hoja_vida.usuario = User.objects.get(id=user.id)
                         hoja_vida.save()
-                        data['mensaje'] = "Registrado correctamente"
                         return redirect(to='home')
-                    else:
-                        data['mensaje'] = "Ocurrió un error"
+                else:
+                    formulario = HojaVidaForm(instance=usuario)
+                
+                data = {
+                    'form': formulario
+                }
 
                 return render(request, 'profileninera.html', data)
                 # Redireccionar, levantar un error, etc.
     else:
         return render(request, '404.html')
-        # Redireccionar, levantar un error, etc.
+        # Redireccionar, levantar un error, etc
 
 
 def profile_cliente(request):
@@ -154,29 +152,3 @@ def profile_cliente(request):
     else:
         return render(request, '404.html')
         # Redireccionar, levantar un error, etc.
-
-
-def crear_historia_clinica(request):
-    user = request.user
-    if user.is_ninera:
-        profile = user.get_ninera_profile()
-        # Tal vez el doctor es nuevo y no tiene perfil
-        if profile:
-            print("Hola1")
-            # Mas código
-        else:
-            print("Hola2")
-            # Redireccionar, levantar un error, etc.
-    else:
-        print("Hola3")
-        # Redireccionar, levantar un error, etc.
-
-
-def solo_para_clientes(request):
-    user = request.user
-    if user.groups.filter(name='cliente').exists():
-        # Tiene los privilegios de este grupo
-        print("hola")
-    else:
-        # Redireccionar, levantar un error, etc.
-        print("hola")

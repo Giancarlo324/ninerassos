@@ -9,6 +9,9 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     id = models.IntegerField("Identificación", primary_key=True, unique=True)
+    first_name = models.CharField("Nombres", max_length=255)
+    last_name = models.CharField("Apellidos", max_length=255)
+    email = models.EmailField("email", unique=True, max_length=255)
     is_ninera = models.BooleanField(default=False)
     is_cliente = models.BooleanField(default=False)
     tiene_hoja_vida = models.BooleanField(default=False)

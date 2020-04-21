@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 
 
 STATUS = ((0, "Draft"), (1, "Publish"))
+SUSCRIPCION = ((0, "Finalizada"), (1, "Activa"))
 
 # Una hoja de vida le pertenece a un usuario
 # Una hoja de vida no puede existir sin un usuario
@@ -46,6 +47,7 @@ class Hojavida(models.Model):
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
+    suscripcion = models.IntegerField(choices=SUSCRIPCION, default=0)
     """author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="blog_posts"
     )"""
