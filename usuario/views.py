@@ -84,10 +84,10 @@ def profile_ninera(request):
         else:
             print("Hola2")
             print("Hola2"+str(user.id))
-            post = Hojavida.objects.get(id=user.id)
             #
             # Si está disponible, es porque ya llenó la hoja de vida
             if user.tiene_hoja_vida:
+                post = Hojavida.objects.get(id=user.id)
                 data = {'form': CambiarEstadoForm(instance=usuario), 'post':post,}
                 if request.method == 'POST':
                     formulario = CambiarEstadoForm(
