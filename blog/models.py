@@ -18,6 +18,7 @@ def now_plus_30():
 
 
 class Hojavida(models.Model):
+    imagen = models.ImageField("Foto de perfil", null=True, blank=True)
     id = models.IntegerField("Identificación", primary_key=True, unique=True)
     # Si un usuario se elimine, también se hará la relación hojavida
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, null=False, blank=False)
@@ -25,7 +26,7 @@ class Hojavida(models.Model):
     # Se obliga a que hoja vida tenga relación con User.
     first_name = models.CharField("Nombres", max_length=255)
     last_name = models.CharField("Apellidos", max_length=255)
-    birth_date = models.DateField("Fecha de nacimiento")
+    birth_date = models.DateField("Fecha de nacimiento(mm/dd/yyyy)")
     SEX = (
         ('M', 'Masculino'),
         ('F', 'Femenino'),
@@ -37,7 +38,7 @@ class Hojavida(models.Model):
     residencia = models.CharField("Dirección de residencia", max_length=255)
     habilidades = models.TextField("Habilidades y aptitudes")
     experiencia_lab = models.TextField("Experiencia laboral")
-    formacion = models.TextField("Formación")
+    formacion = models.TextField("Formación académica")
 
     fecha_inicio = models.DateTimeField("Inicio de suscripción", auto_now_add=True)
     fecha_fin = models.DateTimeField("Fin de suscripción", default=now_plus_30)

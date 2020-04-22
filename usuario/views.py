@@ -102,7 +102,7 @@ def profile_ninera(request):
             else: # No tiene hoja de vida
                 
                 if request.method == 'POST':
-                    formulario = HojaVidaForm(request.POST)
+                    formulario = HojaVidaForm(request.POST, files=request.FILES)
                     if formulario.is_valid():
                         # Actualizar a que ya tiene hoja de vida y ninera disponible
                         actualizacion = User.objects.get(id=user.id)
