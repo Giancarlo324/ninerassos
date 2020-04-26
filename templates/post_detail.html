@@ -26,10 +26,10 @@
         {% else %}
         Sin foto de perfil
         {% endif %}
-        <p class="card-text">{{ post.first_name }}</p>
-        <p class="card-text">{{ post.num_telefono }}</p>
-        <p class="card-text">{{ post.residencia }}</p>
-        <p class="card-text">{{ post.email }}</p>
+        <p class="card-text"><b>Nombre:</b> {{ post.first_name }}</p>
+        <p class="card-text"><b>Celular:</b> {{ post.num_telefono }}</p>
+        <p class="card-text"><b>Dirección de residencia:</b> {{ post.residencia }}</p>
+        <p class="card-text"><b>Email:</b> {{ post.email }}</p>
         <input class="btn btn-danger" type="button" value="Ocultar información" onclick="ocultar();">
       </div>
       {% endif %}
