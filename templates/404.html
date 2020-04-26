@@ -1,6 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
 
-Página no encontrada
+<div class="container">
+    <div class="row">
+        <div class="card mb-4 mt-3 left top">
+            <div class="card-body">
+                <div class="col-md-12">
+                    <div class="error-template">
+                        <h1>
+                            Oops!</h1>
+                        <h2>
+                            404 Pagina No Encontrada</h2>
+                        <div class="error-details">
+                            Lo sentimos :( no se ha encontrado tu página
+                        </div>
+                        <div class="error-actions">
+                            <a href="{% url 'home' %}" class="btn btn-primary btn-lg"><span
+                                    class="glyphicon glyphicon-home"></span>
+                                Volver al inicio </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 {% endblock content %}

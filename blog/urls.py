@@ -14,6 +14,12 @@ urlpatterns = [
     # 404
     path("page404/", views.page404, name="page404"),
 
+    # Políticas
+    path("tyc/", views.tyc, name="tyc"),
+    path("cookies/", views.cookies, name="cookies"),
+    path("avisolegal/", views.avisolegal, name="avisolegal"),
+    path("acerca_de/", views.acerca_de, name="acerca_de"),
+
     # Usuario
     path("registrarninera/", usuario_view.registrar_ninera, name="registrar_ninera"),
     path("registrarcliente/", usuario_view.registrar_cliente, name="registrar_cliente"),
@@ -31,4 +37,3 @@ urlpatterns = [
     # path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
     path("<slug:slug>/", views.post_detail, name="post_detail"),
 ]
-

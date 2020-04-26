@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="card mb-4 mt-3 left top">
+            <div class="card-body">
+                <h1>Acerca de</h1>
+                <div class="container">
+                    <h1><span class="text-muted font-weight-normal">¡DENUNCIA!</span></h1>
+                    <p>
+                        Si notas alguna irregularidad con alguna de nuestras niñeras o clientes,
+                        comunícate con alguno de nosotros que estaremos muy pendientes en cuanto a esto.
+                        La seguridad en nuestro servicio es nuestra mayor prioridad para que exista
+                        confianza entre todos.
+                    </p>
+                    <p>
+                        Todas nuestras niñeras se encuentran verificadas manualmente, no cualquiera llegará a ser
+                        aceptada en nuestra pagina, trabajamos diariamente para brindar el mejor servicio.
+                    </p>
+
+                </div>
+                <div class="container">
+                    {% load static %}
+                    <h2><span class="text-muted font-weight-normal">Conoce nuestro equipo</span><br> Contacta a
+                        cualquier administrador
+                    </h2>
+                    <div class="row justify-content-start">
+                        <div class="col-md-6 "><img class="img-responsive" src="{% static 'team/Giancarlo.jpg' %}"
+                                alt="" width="320" height="404" />
+                            <h6><a href="">Giancarlo Rosero Portillo</a></h6><span class="small small-md">Ingeniero de
+                                sistemas</span>
+                            <p>Correo elecrónico: roserogiancarlo@gmail.com<br>Celular: 3163965498.</p>
+                        </div>
+                        <div class="col-md-6 "><img class="img-responsive" src="{% static 'team/MAteo.jpg' %}" alt=""
+                                width="320" height="404" />
+                            <h6><a href="">Mateo Luna</a></h6><span class="small small-md">Ingeniero de sistemas</span>
+                            <p>Correo elecrónico: mateolunaosorio@gmail.com<br>Celular: 3046608453.</p>
+                        </div>
+                        <div class="col-md-6 "><img class="img-responsive" src="{% static 'team/Carolina.jpg' %}" alt=""
+                                width="320" height="404" />
+                            <h6><a href="">Carolina Botina</a></h6><span class="small small-md">Ingeniera de
+                                sistemas</span>
+                            <p>Correo elecrónico: caritobotina97@gmail.com<br>Celular: 3502138183.</p>
+                        </div>
+                        <div class="col-md-6 "><img class="img-responsive" src="{% static 'team/William.jpg' %}" alt=""
+                                width="320" height="404" />
+                            <h6><a href="">William Zambrano</a></h6><span class="small small-md">Ingeniero de
+                                sistemas</span>
+                            <p>Correo elecrónico: djwoz1998@gmail.com<br>Celular: 3134526988.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

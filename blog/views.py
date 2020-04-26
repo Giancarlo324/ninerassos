@@ -68,25 +68,45 @@ def listado_nineras(request):
     }
     return render(request, "index.html", data)
 
-def page404(request):
+def page404(request, exception):
     return render(request, '404.html')
+
+def tyc(request):
+    return render(request, 'tyc.html')
+
+def cookies(request):
+    return render(request, 'cookies.html')
+
+def avisolegal(request):
+    return render(request, 'avisolegal.html')
+
+def acerca_de(request):
+    return render(request, 'acerca_de.html')
 
 
 @login_required
 def post_detail(request, slug):
     template_name = "post_detail.html"
     post = get_object_or_404(Hojavida, slug=slug)
+    promedio = 0
     comments = post.comments.filter(active=True).order_by("-created_on")
     new_comment = None
     # Comment posted
     if request.method == "POST":
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
-
             # Create Comment object but don't save to database yet
             new_comment = comment_form.save(commit=False)
             # Assign the current post to the comment
             new_comment.post = post
+            # Actualizar promedio
+            actualizacion = User.objects.get(pk=post.id)
+            promedio = (post.stars_count+new_comment.stars_count)/2
+            Hojavida.objects.filter(pk=post.id).update(
+                stars_count=promedio)
+            actualizacion.refresh_from_db()
+            # Actualizar promedio
+            
             new_comment.active = True
             # Save the comment to the database
             new_comment.save()
@@ -97,6 +117,7 @@ def post_detail(request, slug):
         request,
         template_name,
         {
+            "promedio": promedio,
             "post": post,
             "comments": comments,
             "new_comment": new_comment,

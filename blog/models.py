@@ -18,7 +18,7 @@ def now_plus_30():
 
 
 class Hojavida(models.Model):
-    imagen = models.ImageField("Foto de perfil", null=True, blank=True)
+    imagen = models.ImageField("Foto de perfil")
     id = models.IntegerField("Identificación", primary_key=True, unique=True)
     # Si un usuario se elimine, también se hará la relación hojavida
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, null=False, blank=False)
@@ -39,13 +39,14 @@ class Hojavida(models.Model):
     habilidades = models.TextField("Habilidades y aptitudes")
     experiencia_lab = models.TextField("Experiencia laboral")
     formacion = models.TextField("Formación académica")
+    stars_count = models.DecimalField(max_digits=2, decimal_places=1, default=0)
 
     fecha_inicio = models.DateTimeField("Inicio de suscripción", auto_now_add=True)
     fecha_fin = models.DateTimeField("Fin de suscripción", default=now_plus_30)
-    title = models.CharField(max_length=200, unique=True)
+    title = models.CharField("Escribe un título a tu servicio", max_length=200)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     updated_on = models.DateTimeField(auto_now=True)
-    content = models.TextField()
+    content = models.TextField("Escribe una breve descripción de como brindas tu servicio de niñera")
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
     suscripcion = models.IntegerField(choices=SUSCRIPCION, default=0)
@@ -72,9 +73,10 @@ class Hojavida(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey(
         Hojavida, on_delete=models.CASCADE, related_name="comments")
-    name = models.CharField(max_length=80)
-    email = models.EmailField()
-    body = models.TextField()
+    stars_count = models.DecimalField("calificación", max_digits=2, decimal_places=1, default=5)
+    name = models.CharField("Nombre", max_length=80)
+    email = models.EmailField("Email")
+    body = models.TextField("Escribe el porqué dejas este comentario y calificación")
     created_on = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=False)
 

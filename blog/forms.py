@@ -9,7 +9,18 @@ User = get_user_model()
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ('name', 'email', 'body')
+        fields = ('stars_count', 'name', 'email', 'body')
+        widgets = {
+                'name': forms.TextInput(attrs={'class':'form-control is-valid', 'placeholder':'Tu nombre'}),
+                'email': forms.EmailInput(attrs={'class':'form-control'}),
+            }
+    def clean_stars_count(self):
+        stars_count = self.cleaned_data.get('stars_count')
+
+        if stars_count < 0 or stars_count > 5:
+            raise forms.ValidationError(
+                "La calificación debe ir  El número de celular "+str(stars_count)+" es incorrecto.")
+        return stars_count
 
 
 class CustomUserForm(UserCreationForm):
@@ -83,11 +94,11 @@ class HojaVidaForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class':'form-control', 'readonly': 'True'}),
             'num_telefono': forms.NumberInput(attrs={'class':'form-control', 'type': 'tel'}),
             'residencia': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Residencia'}),
-            'habilidades': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Habilidades'}),
-            'experiencia_lab': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Experiencia laboral'}),
-            'formacion': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Formación académica'}),
+            #'habilidades': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Habilidades'}),
+            #'experiencia_lab': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Experiencia laboral'}),
+            #'formacion': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Formación académica'}),
             'title': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nombre creativo de tu servicio'}),
-            'content': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Descríbete la manera en que brindas tu servicio'}),
+            #'content': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Descríbete la manera en que brindas tu servicio'}),
         }
 
     def clean_num_telefono(self):

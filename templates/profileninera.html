@@ -2,15 +2,27 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-{{ hola }}
 {% if user.tiene_hoja_vida %}
 <div class="container">
     <div class="row">
         <div class="col-md-8 card mb-4 mt-3 left top">
             <div class="card-body">
 
-                <h1>Estado actual: {% if user.ninera_disponible %} <input type="submit" value="Disponible"
+                <h1>Ahora mismo estás: {% if user.ninera_disponible %} <input type="submit" value="Disponible"
                         class="btn btn-success"> {% else %} Ocupada {% endif %}</h1>
+                {% if post.imagen != None %}
+                <p class="card-text"><img src="{{ post.imagen.url }}" alt="Foto"
+                        class="img-fluid img-thumbnail rounded mx-auto d-block" width="250" height="250"></p>
+                {% else %}
+                Sin foto de perfil
+                {% endif %}
+
+                <h1>Suscripción</h1>
+
+                <b>Fecha de suscripción: </b> {{ post.fecha_inicio }} <br>
+                <b>Fecha fin de suscripción: </b> {{ post.fecha_fin }}
+
+                <h2>Modificar estado</h2>
 
                 <form action="" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -19,11 +31,6 @@
 
                     <input type="submit" value="Actualizar estado" class="btn btn-danger">
                 </form>
-
-                <h1>Suscripción</h1>
-
-                <b>Fecha de suscripción: </b> {{ post.fecha_inicio }} <br>
-                <b>Fecha fin de suscripción: </b> {{ post.fecha_fin }}
             </div>
         </div>
     </div>
@@ -31,29 +38,20 @@
 
 {% else %}
 <div class="container">
-    <h2>
-        Registro de hoja de vida
-    </h2>
-    <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form | crispy }}
-            <!--
-            <div class="form-group">
-              <div class="form-check">
-                <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
-                <label class="form-check-label" for="invalidCheck3">
-                  Agree to terms and conditions
-                </label>
-                <div class="invalid-feedback">
-                  You must agree before submitting.
-                </div>
-              </div>
-            </div>
-            -->
-        <div class="float-right">
-            <input type="submit" value="Registrar" class="btn btn-success">
+    <div class="row">
+            <div class="card-body">
+                <h2>
+                    Registro de hoja de vida
+                </h2>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <div class="float-right">
+                        <input type="submit" value="Registrar" class="btn btn-success">
+                    </div>
+                </form>
         </div>
-    </form>
+    </div>
 </div>
 
 {% endif %}

@@ -31,7 +31,6 @@
           <p class="card-text text-muted h6">{{ post.first_name }} | {{ post.created_on}}  </p>
 
           <p class="card-text">{{ post.content|slice:":200" }}</p>
-          <p class="card-text">Esto: {{ post.fecha_fin }}</p>
           <a href="{% url 'post_detail' post.slug  %}" class="btn btn-primary">Leer más &rarr;</a>
           {% if post.usuario.ninera_disponible %}
             <a href="{% url 'post_detail' post.slug  %}" class="btn btn-success">Disponible</a>

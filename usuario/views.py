@@ -1,5 +1,6 @@
 from blog.forms import CustomUserForm, HojaVidaForm, CambiarEstadoForm
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from .models import User
 from blog.models import Hojavida
@@ -55,7 +56,7 @@ def registrar_cliente(request):
     }
     return render(request, 'registration/registrarcliente.html', data)
 
-
+@login_required
 def profile_ninera(request):
     new_hoja_vida = None
     user = request.user
@@ -129,7 +130,7 @@ def profile_ninera(request):
         return render(request, '404.html')
         # Redireccionar, levantar un error, etc
 
-
+@login_required
 def profile_cliente(request):
     user = request.user
     hola = "clienteee"

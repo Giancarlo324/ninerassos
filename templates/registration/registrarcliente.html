@@ -9,6 +9,7 @@ Tienes una sesión activa
 {% else %}
 
 <div class="container">
+    <div class="card-body">
     <h2>
         Registro de Cliente
     </h2>
@@ -19,12 +20,15 @@ Tienes una sesión activa
 
         {{ form | crispy }}
 
+        Al registrarte aceptas nuestros <a href="{% url 'tyc' %}" target="blank" >términos y condiciones.</a>
+
 
         <div class="float-right">
             <input type="reset" value="Limpiar" class="btn btn-info">
             <input type="submit" value="Registrar" class="btn btn-success">
         </div>
     </form>
+</div>
 </div>
 
 {% endif %}

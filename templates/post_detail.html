@@ -4,21 +4,28 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-8 card mb-4  mt-3 left  top">
+    <div class="col-md-8 card mb-4  mt-3 left top">
       <div class="card-body">
         <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
         <p class=" text-muted">{{ post.first_name }} | {{ post.created_on }}</p>
+        <p class="card-text "><b>Calificación: </b>{{ post.stars_count }}</p>
         <p class="card-text ">{{ post.content | safe }}</p>
         {% if post.usuario.ninera_disponible %}
         <a href="#" class="btn btn-success">Disponible</a>
-        <input class="btn btn-primary" type="button" value="Mostrar información" onclick="mostrar();">
+        <input class="btn btn-primary" type="button" value="Mostrar información de la niñera" onclick="mostrar();">
         {% else %}
         <a href="#" class="btn btn-danger">No disponible</a>
         {% endif %}
       </div>
       {% if post.usuario.ninera_disponible %}
-      <div class="card-body" id="mostrarOcultar">
+      <div style="display: none;" class="card-body" id="mostrarOcultar">
         <h1>Información</h1>
+        {% if post.imagen != None %}
+        <p class="card-text"><img src="{{ post.imagen.url }}" alt="Foto"
+            class="img-fluid img-thumbnail rounded mx-auto d-block" width="350" height="350"></p>
+        {% else %}
+        Sin foto de perfil
+        {% endif %}
         <p class="card-text">{{ post.first_name }}</p>
         <p class="card-text">{{ post.num_telefono }}</p>
         <p class="card-text">{{ post.residencia }}</p>
@@ -40,6 +47,7 @@
         </p>
 
         <div class="comments" style="padding: 10px;">
+          <b>Calificación: </b>{{ comment.stars_count }}<br>
           <p class="font-weight-bold">
             {{ comment.name }}
             <span class=" text-muted font-weight-normal">
@@ -74,18 +82,15 @@
   </div>
 </div>
 
-<div class="modal fade" id="venana_modal" role="dialog">
-
-</div>
 
 {% endblock content %}
 {% block extra %}
 <script type="text/javascript">
-  function ocultar(){
-    document.getElementById('mostrarOcultar').style.display="none";
+  function ocultar() {
+    document.getElementById('mostrarOcultar').style.display = "none";
   }
-  function mostrar(){
-    document.getElementById('mostrarOcultar').style.display="block";
+  function mostrar() {
+    document.getElementById('mostrarOcultar').style.display = "block";
   }
-  </script>
-  {% endblock extra %}
+</script>
+{% endblock extra %}

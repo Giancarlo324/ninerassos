@@ -3,9 +3,6 @@
 <!DOCTYPE html>
 <html>
 
-
-
-
 <head>
   <title>Niñeras SOS</title>
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
@@ -16,11 +13,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-
 </head>
 
 <body>
-
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light shadow desplegable" id="mainNav">
@@ -46,7 +41,9 @@
           </li>
           {% else %}
           <li class="nav-item text-black">
-            <a class="nav-link text-black font-weight-bold" href="{% url 'profile_cliente' %}">Perfil:
+            <!--<a class="nav-link text-black font-weight-bold" href="{% url 'profile_cliente' %}">Perfil:
+              {{ user.username }}</a>-->
+            <a class="nav-link text-black font-weight-bold" href="{% url 'home' %}">Perfil:
               {{ user.username }}</a>
           </li>
           {% endif %}
@@ -75,8 +72,26 @@
   {% endblock content %}
 
   <!-- Footer -->
-  <footer class="py-3 bg-grey">
-    <p class="m-0 text-dark text-center ">Copyright &copy; Niñeras SOS</p>
+  <footer class="page-footer py-3 bg-primary text-white">
+    <p class="m-0 text-white text-center ">Copyright &copy; Niñeras SOS</p>
+    <div class="container text-white">
+      <br>
+      <div class="row">
+        <div class="col-12 col-md-4 col-lg-2">
+          <h4>Políticas</h4>
+          <p><i class="fab fa-facebook"></i> <a href="{% url 'cookies' %}" class="text-white">Política de Cookies</a>
+          </p>
+          <p><i class="fab fa-facebook"></i> <a href="{% url 'tyc' %}" class="text-white">Política de Privacidad</a>
+          </p>
+          <p><i class="fab fa-facebook"></i> <a href="{% url 'avisolegal' %}" class="text-white">Aviso Legal</a></p>
+        </div>
+        <div class="col-12 col-md-4 col-lg-4">
+          <h4 id="contacto">Contacto</h4>
+          <p><i class="fab fa-facebook"></i> <a href="{% url 'acerca_de' %}" class="text-white">Acerca de</a></p>
+        </div>
+      </div>
+    </div>
+
   </footer>
   <!-- bootstrap scripts -->
 
@@ -89,7 +104,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
-
   {% block extra %}
   {% endblock extra %}
 </body>
