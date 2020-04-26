@@ -39,7 +39,7 @@ class Hojavida(models.Model):
     habilidades = models.TextField("Habilidades y aptitudes")
     experiencia_lab = models.TextField("Experiencia laboral")
     formacion = models.TextField("Formación académica")
-    stars_count = models.DecimalField(max_digits=2, decimal_places=1, default=0)
+    stars_count = models.DecimalField(max_digits=2, decimal_places=1, default=5)
 
     fecha_inicio = models.DateTimeField("Inicio de suscripción", auto_now_add=True)
     fecha_fin = models.DateTimeField("Fin de suscripción", default=now_plus_30)
