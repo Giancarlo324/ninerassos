@@ -51,13 +51,29 @@
             <a class="nav-link text-black font-weight-bold" href="{% url 'logout' %}">Cerrar sesión</a>
           </li>
           {% else %}
-          <a class="nav-link text-black font-weight-bold" href="{% url 'login' %}">Iniciar sesión</a>
           <li class="nav-item text-black">
+            <a class="nav-link text-black font-weight-bold" href="{% url 'login' %}">Iniciar sesión</a>
+          </li>
+          <li class="nav-item text-black">
+            <!---->
+            <div class="dropdown">
+              <button class="btn text-black font-weight" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Registrarse
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{% url 'registrar_ninera' %}">Niñera</a>
+                <a class="dropdown-item" href="{% url 'registrar_cliente' %}">Cliente</a>
+              </div>
+            </div>
+            <!--
             <a class="nav-link text-black font-weight-bold" href="#">Registrarse</a>
             <ul>
               <li><a href="{% url 'registrar_ninera' %}">Niñera</a></li>
+              <br>
               <li><a href="{% url 'registrar_cliente' %}">Cliente</a></li>
             </ul>
+            -->
           </li>
           {% endif %}
         </ul>
@@ -66,33 +82,11 @@
     </div>
   </nav>
 
-
   {% block content %}
   <!-- Content Goes here -->
   {% endblock content %}
 
-  <!-- Footer -->
-  <footer class="page-footer py-3 bg-primary text-white">
-    <p class="m-0 text-white text-center ">Copyright &copy; Niñeras SOS</p>
-    <div class="container text-white">
-      <br>
-      <div class="row">
-        <div class="col-12 col-md-4 col-lg-2">
-          <h4>Políticas</h4>
-          <p><i class="fab fa-facebook"></i> <a href="{% url 'cookies' %}" class="text-white">Política de Cookies</a>
-          </p>
-          <p><i class="fab fa-facebook"></i> <a href="{% url 'tyc' %}" class="text-white">Política de Privacidad</a>
-          </p>
-          <p><i class="fab fa-facebook"></i> <a href="{% url 'avisolegal' %}" class="text-white">Aviso Legal</a></p>
-        </div>
-        <div class="col-12 col-md-4 col-lg-4">
-          <h4 id="contacto">Contacto</h4>
-          <p><i class="fab fa-facebook"></i> <a href="{% url 'acerca_de' %}" class="text-white">Acerca de</a></p>
-        </div>
-      </div>
-    </div>
 
-  </footer>
   <!-- bootstrap scripts -->
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

@@ -18,31 +18,57 @@
 </header>
 <div class="container">
     <div class="card-body">
-    <div class="row">
+        <div class="row">
 
-        {% if user.is_authenticated %}
+            {% if user.is_authenticated %}
 
-        Ya has iniciado sesión
+            Ya has iniciado sesión
 
-        {% else %}
+            {% else %}
 
-        <div class="container">
-            <h2>Autenticación</h2>
-            {% load crispy_forms_tags %}
-            <form action="" method="POST">
-                {% csrf_token %}
+            <div class="container">
+                <h2>Autenticación</h2>
+                {% load crispy_forms_tags %}
+                <form action="" method="POST">
+                    {% csrf_token %}
 
-                {{ form | crispy }}
+                    {{ form | crispy }}
 
-                <input type="submit" value="Iniciar sesión" class="btn btn-success float-right">
-            </form>
+                    <a class="nav-link text-black font-weight-bold" href="{% url 'password_reset' %}">¿Olvidaste tu
+                        contraseña?</a>
+
+                    <input type="submit" value="Iniciar sesión" class="btn btn-success float-right">
+                </form>
+            </div>
+
+            {% endif %}
+            {{ mensaje }}
+
         </div>
-
-        {% endif %}
-        {{ mensaje }}
-
     </div>
 </div>
-</div>
+
+<!-- Footer -->
+<footer class="page-footer py-3 bg-primary text-white" id="footer">
+    <p class="m-0 text-white text-center ">Copyright &copy; Niñeras SOS</p>
+    <div class="container text-white">
+      <br>
+      <div class="row">
+        <div class="col-12 col-md-4 col-lg-2">
+          <h4>Políticas</h4>
+          <p><i class="fab fa-facebook"></i> <a href="{% url 'cookies' %}" class="text-white">Política de Cookies</a>
+          </p>
+          <p><i class="fab fa-facebook"></i> <a href="{% url 'tyc' %}" class="text-white">Política de Privacidad</a>
+          </p>
+          <p><i class="fab fa-facebook"></i> <a href="{% url 'avisolegal' %}" class="text-white">Aviso Legal</a></p>
+        </div>
+        <div class="col-12 col-md-4 col-lg-4">
+          <h4 id="contacto">Contacto</h4>
+          <p><i class="fab fa-facebook"></i> <a href="{% url 'acerca_de' %}" class="text-white">Acerca de</a></p>
+        </div>
+      </div>
+    </div>
+
+  </footer>
 
 {%endblock%}

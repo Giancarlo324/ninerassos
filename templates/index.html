@@ -70,4 +70,27 @@
 </nav>
 </div>
 
+<!-- Footer -->
+<footer class="page-footer py-3 bg-primary text-white" id="footer">
+  <p class="m-0 text-white text-center ">Copyright &copy; Niñeras SOS</p>
+  <div class="container text-white">
+    <br>
+    <div class="row">
+      <div class="col-12 col-md-4 col-lg-2">
+        <h4>Políticas</h4>
+        <p><i class="fab fa-facebook"></i> <a href="{% url 'cookies' %}" class="text-white">Política de Cookies</a>
+        </p>
+        <p><i class="fab fa-facebook"></i> <a href="{% url 'tyc' %}" class="text-white">Política de Privacidad</a>
+        </p>
+        <p><i class="fab fa-facebook"></i> <a href="{% url 'avisolegal' %}" class="text-white">Aviso Legal</a></p>
+      </div>
+      <div class="col-12 col-md-4 col-lg-4">
+        <h4 id="contacto">Contacto</h4>
+        <p><i class="fab fa-facebook"></i> <a href="{% url 'acerca_de' %}" class="text-white">Acerca de</a></p>
+      </div>
+    </div>
+  </div>
+
+</footer>
+
 {%endblock%}

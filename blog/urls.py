@@ -5,6 +5,8 @@ from django.urls import path
 from .feeds import LatestPostsFeed, AtomSiteNewsFeed
 from usuario import views as usuario_view
 
+from django.contrib.auth import views as auth_views
+
 urlpatterns = [
 
     # Home
@@ -19,6 +21,12 @@ urlpatterns = [
     path("cookies/", views.cookies, name="cookies"),
     path("avisolegal/", views.avisolegal, name="avisolegal"),
     path("acerca_de/", views.acerca_de, name="acerca_de"),
+
+    # password reset
+    path('password_reset/', auth_views.PasswordResetView.as_view(template_name="registration/password_reset_form.html"), name="password_reset"),
+    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="registration/password_reset_sent.html"), name="password_reset_done"),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="registration/password_reset_confirm.html"), name="password_reset_confirm"),
+    path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="registration/password_reset_complete.html"), name="password_reset_complete"),
 
     # Usuario
     path("registrarninera/", usuario_view.registrar_ninera, name="registrar_ninera"),

@@ -43,6 +43,7 @@ class Hojavida(models.Model):
 
     fecha_inicio = models.DateTimeField("Inicio de suscripción", auto_now_add=True)
     fecha_fin = models.DateTimeField("Fin de suscripción", default=now_plus_30)
+    pagos = models.IntegerField("Pagos realizados", default=0)
     title = models.CharField("Escribe un título a tu servicio", max_length=200)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     updated_on = models.DateTimeField(auto_now=True)

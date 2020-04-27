@@ -19,7 +19,7 @@ class CommentForm(forms.ModelForm):
 
         if stars_count < 0 or stars_count > 5:
             raise forms.ValidationError(
-                "La calificación debe ir  El número de celular "+str(stars_count)+" es incorrecto.")
+                "La calificación debe tener un rango de 0 a 5, por lo que "+str(stars_count)+" es incorrecto.")
         return stars_count
 
 
