@@ -36,6 +36,9 @@ urlpatterns = [
     path("profileninera/", usuario_view.profile_ninera, name="profile_ninera"),
     path("profilecliente/", usuario_view.profile_cliente, name="profile_cliente"),
 
+    # Modificar perfil niñera
+    path("modificar_publicacion/<id>/", usuario_view.modificar_publicacion, name="modificar_publicacion"),
+
     # path("profileninera/", views.crear_hoja_vida, name="crear_hoja_vida"),
 
 

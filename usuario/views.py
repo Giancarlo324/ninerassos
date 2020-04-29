@@ -1,4 +1,4 @@
-from blog.forms import CustomUserForm, HojaVidaForm, CambiarEstadoForm
+from blog.forms import CustomUserForm, HojaVidaForm, CambiarEstadoForm, ActualizarPerfilForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
@@ -153,3 +153,20 @@ def profile_cliente(request):
     else:
         return render(request, '404.html')
         # Redireccionar, levantar un error, etc.
+
+@login_required
+def modificar_publicacion(request, id):
+    print("Esto es: "+str(id))
+    hojavida = get_object_or_404(Hojavida, id=id)
+    # hojavida = Hojavida.objects.get(id=id)
+    data = {
+        'form': ActualizarPerfilForm(instance=hojavida),
+        'val': hojavida
+    }
+    if request.method == 'POST':
+        formulario = ActualizarPerfilForm(data=request.POST, instance=hojavida)
+        if formulario.is_valid():
+            formulario.save()
+            data['form'] = formulario
+            return redirect(to='home')
+    return render(request, 'modificar_perfil_ninera.html', data)

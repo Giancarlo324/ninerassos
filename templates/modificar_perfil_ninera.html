@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% if user.id != val.id %}
+<div class="container">
+    <div class="row">
+            <div class="card-body">
+                <h2>
+                    No tienes permiso para ingresar a esta página.
+                </h2>
+        </div>
+    </div>
+</div>
+{% else %}
+{% if user.tiene_hoja_vida %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 card mb-4 mt-3 left top">
+            <div class="card-body">
+
+                <h2>Modificar estado</h2>
+
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {{ form | crispy }}
+
+                    <input type="submit" value="Actualizar" class="btn btn-success">
+                    <a href="{% url 'home' %}" class="btn btn-danger" role="button">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% else %}
+<div class="container">
+    <div class="row">
+            <div class="card-body">
+                <h2>
+                    Hoja de vida no encontrada :(
+                </h2>
+                Debes registrar tu hoja de vida en tu perfil.
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{% endif %}
+
+{% endblock content %}

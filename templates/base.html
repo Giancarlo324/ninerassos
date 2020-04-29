@@ -39,6 +39,13 @@
             <a class="nav-link text-black font-weight-bold" href="{% url 'profile_ninera' %}">Perfil:
               {{ user.username }}</a>
           </li>
+          {% if user.tiene_hoja_vida %}
+          <li class="nav-item text-black">
+            <a class="nav-link text-black font-weight-bold" href="{% url 'modificar_publicacion' user.id %}">
+              Actualizar perfil
+            </a>
+          </li>
+          {% endif %}
           {% else %}
           <li class="nav-item text-black">
             <!--<a class="nav-link text-black font-weight-bold" href="{% url 'profile_cliente' %}">Perfil:

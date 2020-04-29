@@ -11,9 +11,10 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('stars_count', 'name', 'email', 'body')
         widgets = {
-                'name': forms.TextInput(attrs={'class':'form-control is-valid', 'placeholder':'Tu nombre'}),
-                'email': forms.EmailInput(attrs={'class':'form-control'}),
-            }
+            'name': forms.TextInput(attrs={'class': 'form-control is-valid', 'placeholder': 'Tu nombre'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+        }
+
     def clean_stars_count(self):
         stars_count = self.cleaned_data.get('stars_count')
 
@@ -68,6 +69,15 @@ class CambiarEstadoForm(forms.ModelForm):
         fields = ['ninera_disponible']
 
 
+class ActualizarPerfilForm(forms.ModelForm):
+    class Meta:
+        model = Hojavida
+        fields = ['imagen',
+                  'title',
+                  'content'
+                  ]
+
+
 class HojaVidaForm(forms.ModelForm):
     class Meta:
         model = Hojavida
@@ -86,19 +96,19 @@ class HojaVidaForm(forms.ModelForm):
                   'title',
                   'content']
         widgets = {
-            'imagen': forms.FileInput(attrs={'class':'form-control-file'}),
-            'id': forms.NumberInput(attrs={'class':'form-control', 'id':'hola', 'readonly':'True'}),
-            'first_name': forms.TextInput(attrs={'class':'form-control is-valid', 'placeholder':'Nombres', 'readonly':'True'}),
-            'last_name': forms.TextInput(attrs={'class':'form-control is-valid', 'placeholder':'Apellidos', 'readonly':'True'}),
-            'birth_date': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
-            'email': forms.EmailInput(attrs={'class':'form-control', 'readonly': 'True'}),
-            'num_telefono': forms.NumberInput(attrs={'class':'form-control', 'type': 'tel'}),
-            'residencia': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Residencia'}),
-            #'habilidades': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Habilidades'}),
-            #'experiencia_lab': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Experiencia laboral'}),
-            #'formacion': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Formación académica'}),
-            'title': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nombre creativo de tu servicio'}),
-            #'content': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Descríbete la manera en que brindas tu servicio'}),
+            'imagen': forms.FileInput(attrs={'class': 'form-control-file'}),
+            'id': forms.NumberInput(attrs={'class': 'form-control', 'id': 'hola', 'readonly': 'True'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control is-valid', 'placeholder': 'Nombres', 'readonly': 'True'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control is-valid', 'placeholder': 'Apellidos', 'readonly': 'True'}),
+            'birth_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'readonly': 'True'}),
+            'num_telefono': forms.NumberInput(attrs={'class': 'form-control', 'type': 'tel'}),
+            'residencia': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Residencia'}),
+            # 'habilidades': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Habilidades'}),
+            # 'experiencia_lab': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Experiencia laboral'}),
+            # 'formacion': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Formación académica'}),
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre creativo de tu servicio'}),
+            # 'content': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Descríbete la manera en que brindas tu servicio'}),
         }
 
     def clean_num_telefono(self):
