@@ -1,25 +1,52 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% load static %}
 
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
 
-<header class="masthead">
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="row">
-      <div class=" col-md-8 col-md-10 mx-auto">
-        <div class="site-heading">
-          <h3 class=" site-heading my-4 mt-3 text-white"> Bienvenidos a Niñeras SOS </h3>
-          <p class="text-light">Trabajamos duro para brindar el mejor servicio
-          </p>
-        </div>
+<!-- Inicio del Carousel -->
+<div id="slide" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#slide" data-slide-to="0" class="active"></li>
+    <li data-target="#slide" data-slide-to="1"></li>
+    <li data-target="#slide" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'principal/1.jpg' %}" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>NIÑERAS SOS</h5>
+        <p class="p_sidebar">La mejor opción para el cuidado de sus niños </p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'principal/3.jpg' %}" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Para Papitos y para Mamitas</h5>
+        <p class="p_sidebar">Encontraras una persona confiable para el cuidado de tus niños</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'principal/4.jpg' %}" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Para ti, Niñera</h5>
+        <p class="p_sidebar">Podemos ofrecerte una buena oportunidad de trabajo</p>
       </div>
     </div>
   </div>
-  </div>
-</header>
-
+  <a class="carousel-control-prev" href="#slide" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Anterior</span>
+  </a>
+  <a class="carousel-control-next" href="#slide" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Siguiente</span>
+  </a>
+</div>
+<!-- Zona Niñeras -->
 <div class="container">
+  <h6> Estas son nuestras Niñeras:</h6>
   <div class="row">
 
     <!-- Blog Entries Column -->
@@ -71,8 +98,9 @@
 </div>
 
 <!-- Footer -->
-<footer class="page-footer py-3 bg-primary text-white" id="footer">
-  <p class="m-0 text-white text-center ">Copyright &copy; Niñeras SOS</p>
+<footer class="footer py-2 text-xs-center">
+  <div class="container">
+    <p class="m-0 text-white text-center ">Copyright &copy; Niñeras SOS</p>
   <div class="container text-white">
     <br>
     <div class="row">
@@ -89,6 +117,7 @@
         <p><i class="fab fa-facebook"></i> <a href="{% url 'acerca_de' %}" class="text-white">Acerca de</a></p>
       </div>
     </div>
+  </div>
   </div>
 
 </footer>

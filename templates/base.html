@@ -5,22 +5,32 @@
 
 <head>
   <title>Niñeras SOS</title>
-  <link rel="stylesheet" href="{% static 'css/base.css' %}">
   <meta charset="UTF-8" />
 
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
   <meta name="google" content="notranslate" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&family=Shadows+Into+Light&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave&family=Shadows+Into+Light&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave&family=Shadows+Into+Light&family=Wendy+One&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
-
   <!-- Navigation -->
+
+  <!--AAAAAAAAAAAAAAAAAAAAAAAAAAAAA-->
   <nav class="navbar navbar-expand-lg navbar-light bg-light shadow desplegable" id="mainNav">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'home' %}">Niñeras SOS</a>
+      <a class="nav-link text-black font-weight-bold" href="{% url 'home' %}">
+        <img src="{% static 'principal/logo2.jpg' %}" width="100px" height="100px" alt="">
+      </a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
         data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
         aria-label="Toggle navigation">
@@ -29,15 +39,14 @@
 
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-
           <li class="nav-item text-black">
             <a class="nav-link text-black font-weight-bold" href="{% url 'home' %}">Inicio</a>
           </li>
+
           {% if user.is_authenticated %}
           {% if user.is_ninera %}
           <li class="nav-item text-black">
-            <a class="nav-link text-black font-weight-bold" href="{% url 'profile_ninera' %}">Perfil:
-              {{ user.username }}</a>
+            <a class="nav-link text-black font-weight-bold" href="{% url 'profile_ninera' %}">Mi Perfil</a>
           </li>
           {% if user.tiene_hoja_vida %}
           <li class="nav-item text-black">
@@ -50,8 +59,7 @@
           <li class="nav-item text-black">
             <!--<a class="nav-link text-black font-weight-bold" href="{% url 'profile_cliente' %}">Perfil:
               {{ user.username }}</a>-->
-            <a class="nav-link text-black font-weight-bold" href="{% url 'home' %}">Perfil:
-              {{ user.username }}</a>
+            <a class="nav-link text-black font-weight-bold" href="{% url 'home' %}">Mi Perfil</a>
           </li>
           {% endif %}
           <li class="nav-item text-black">
@@ -73,14 +81,6 @@
                 <a class="dropdown-item" href="{% url 'registrar_cliente' %}">Cliente</a>
               </div>
             </div>
-            <!--
-            <a class="nav-link text-black font-weight-bold" href="#">Registrarse</a>
-            <ul>
-              <li><a href="{% url 'registrar_ninera' %}">Niñera</a></li>
-              <br>
-              <li><a href="{% url 'registrar_cliente' %}">Cliente</a></li>
-            </ul>
-            -->
           </li>
           {% endif %}
         </ul>
@@ -88,6 +88,9 @@
     </div>
     </div>
   </nav>
+  <!--AAAAAAAAAAAAAAAAAAAAAAAAAAAAA-->
+  
+<!-- End Navigation -->
 
   {% block content %}
   <!-- Content Goes here -->
