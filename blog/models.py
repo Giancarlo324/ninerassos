@@ -1,3 +1,4 @@
+import random
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -62,7 +63,7 @@ class Hojavida(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(round(self.id*0.9+5))
+        self.slug = slugify(round(self.id*0.02+random.uniform(0, 1)))
         super(Hojavida, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -75,7 +76,7 @@ class Comment(models.Model):
     post = models.ForeignKey(
         Hojavida, on_delete=models.CASCADE, related_name="comments")
     stars_count = models.DecimalField("calificación", max_digits=2, decimal_places=1, default=5)
-    name = models.CharField("Nombre", max_length=80)
+    first_name = models.CharField("Nombres", max_length=255)
     email = models.EmailField("Email")
     body = models.TextField("Escribe el porqué dejas este comentario y calificación")
     created_on = models.DateTimeField(auto_now_add=True)

@@ -9,10 +9,10 @@ User = get_user_model()
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ('stars_count', 'name', 'email', 'body')
+        fields = ('stars_count', 'first_name', 'email', 'body')
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control is-valid', 'placeholder': 'Tu nombre'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control is-valid', 'placeholder': 'Nombres', 'readonly': 'True'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'readonly': 'True'}),
         }
 
     def clean_stars_count(self):

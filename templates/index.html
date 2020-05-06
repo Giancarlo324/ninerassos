@@ -5,30 +5,28 @@
 
 <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
-<!-- Inicio del Carousel -->
+
+<header>
 <div id="slide" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#slide" data-slide-to="0" class="active"></li>
     <li data-target="#slide" data-slide-to="1"></li>
     <li data-target="#slide" data-slide-to="2"></li>
   </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="{% static 'principal/1.jpg' %}" class="d-block w-100" alt="...">
+  <div class="carousel-inner" role="listbox">
+    <div class="carousel-item active" style="background-image: url('{% static 'principal/1.jpg' %}')">
       <div class="carousel-caption d-none d-md-block">
         <h5>NIÑERAS SOS</h5>
         <p class="p_sidebar">La mejor opción para el cuidado de sus niños </p>
       </div>
     </div>
-    <div class="carousel-item">
-      <img src="{% static 'principal/3.jpg' %}" class="d-block w-100" alt="...">
+    <div class="carousel-item" style="background-image: url('{% static 'principal/3.jpg' %}')">
       <div class="carousel-caption d-none d-md-block">
         <h5>Para Papitos y para Mamitas</h5>
-        <p class="p_sidebar">Encontraras una persona confiable para el cuidado de tus niños</p>
+        <p class="p_sidebar">Encontrarás una persona confiable para el cuidado de tus niños</p>
       </div>
     </div>
-    <div class="carousel-item">
-      <img src="{% static 'principal/4.jpg' %}" class="d-block w-100" alt="...">
+    <div class="carousel-item" style="background-image: url('{% static 'principal/4.jpg' %}')">
       <div class="carousel-caption d-none d-md-block">
         <h5>Para ti, Niñera</h5>
         <p class="p_sidebar">Podemos ofrecerte una buena oportunidad de trabajo</p>
@@ -44,7 +42,8 @@
     <span class="sr-only">Siguiente</span>
   </a>
 </div>
-<!-- Zona Niñeras -->
+</header>
+<!-- Content -->
 <div class="container">
   <h6> Estas son nuestras Niñeras:</h6>
   <div class="row">

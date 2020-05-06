@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from usuario.models import User
 from datetime import datetime, timedelta
 from django.core.paginator import Paginator
+import random
 
 
 class PostList(generic.ListView):
@@ -91,6 +92,8 @@ def post_detail(request, slug):
     promedio = 0
     comments = post.comments.filter(active=True).order_by("-created_on")
     new_comment = None
+    user = request.user
+    usuario = User.objects.get(id=user.id)
     # Comment posted
     if request.method == "POST":
         comment_form = CommentForm(data=request.POST)
@@ -111,7 +114,7 @@ def post_detail(request, slug):
             # Save the comment to the database
             new_comment.save()
     else:
-        comment_form = CommentForm()
+        comment_form = CommentForm(instance=usuario)
 
     return render(
         request,

@@ -47,9 +47,12 @@
         </p>
 
         <div class="comments" style="padding: 10px;">
-          <b>Calificación: </b>{{ comment.stars_count }}<br>
-          <p class="font-weight-bold">
-            {{ comment.name }}
+          <b>Calificación: </b>{{ comment.stars_count }}<br><br>
+          <p class="font-weight-bold">Nombre: 
+            {{ comment.first_name }} <br>
+            Email:
+            {{ comment.email }}
+            <br><b>Comentario:</b>
             <span class=" text-muted font-weight-normal">
               {{ comment.created_on }}
             </span>
