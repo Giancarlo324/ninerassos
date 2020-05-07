@@ -12,9 +12,33 @@
                 contigo y la niñera. Recuerda que buscamos brindar el mejor servicio y todas las peticiones,
                 quejas o reclamos serán atendidas.
             </p>
-            <a href="{% url 'acerca_de' %}" class="btn btn-danger">Conoce más!</a>
+            <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modal-denuncia">Denuncia</a>
         </div>
     </div>
 </div>
+
+<div class="modal" tabindex="-1" role="dialog" id="modal-denuncia">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Denuncia</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Si notas alguna irregularidad con alguna de nuestras niñeras o clientes,
+            comunícate con alguno de nosotros que estaremos muy pendientes en cuanto a esto.
+            La seguridad en nuestro servicio es nuestra mayor prioridad para que exista
+            confianza entre todos.</p>
+            <h4 class="modal-title">¡Informa ya mismo!</h4>
+            <p><b>Nuestro correo: </b>denuncias@ninerassos.com.co</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 {% endblock sidebar %}

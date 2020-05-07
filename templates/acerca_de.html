@@ -1,59 +1,92 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
 
 <div class="container">
     <div class="row">
         <div class="card mb-4 mt-3 left top">
             <div class="card-body">
-                <h1>Acerca de</h1>
-                <div class="container">
-                    <h1><span class="text-muted font-weight-normal">¡DENUNCIA!</span></h1>
-                    <p>
-                        Si notas alguna irregularidad con alguna de nuestras niñeras o clientes,
-                        comunícate con alguno de nosotros que estaremos muy pendientes en cuanto a esto.
-                        La seguridad en nuestro servicio es nuestra mayor prioridad para que exista
-                        confianza entre todos.
-                    </p>
-                    <p>
-                        Todas nuestras niñeras se encuentran verificadas manualmente, no cualquiera llegará a ser
-                        aceptada en nuestra pagina, trabajamos diariamente para brindar el mejor servicio.
-                    </p>
-
+                <div class="row heading heading-icon">
+                    <h6>Acerca De</h6>
                 </div>
                 <div class="container">
-                    {% load static %}
-                    <h2><span class="text-muted font-weight-normal">Conoce nuestro equipo</span><br> Contacta a
-                        cualquier administrador
-                    </h2>
-                    <div class="row justify-content-start">
-                        <div class="col-md-6 "><img class="img-responsive" src="{% static 'team/Giancarlo.jpg' %}"
-                                alt="" width="320" height="404" />
-                            <h6><a href="">Giancarlo Rosero Portillo</a></h6><span class="small small-md">Ingeniero de
-                                sistemas</span>
-                            <p>Correo elecrónico: roserogiancarlo@gmail.com<br>Celular: 3163965498.</p>
-                        </div>
-                        <div class="col-md-6 "><img class="img-responsive" src="{% static 'team/MAteo.jpg' %}" alt=""
-                                width="320" height="404" />
-                            <h6><a href="">Mateo Luna</a></h6><span class="small small-md">Ingeniero de sistemas</span>
-                            <p>Correo elecrónico: mateolunaosorio@gmail.com<br>Celular: 3046608453.</p>
-                        </div>
-                        <div class="col-md-6 "><img class="img-responsive" src="{% static 'team/Carolina.jpg' %}" alt=""
-                                width="320" height="404" />
-                            <h6><a href="">Carolina Botina</a></h6><span class="small small-md">Ingeniera de
-                                sistemas</span>
-                            <p>Correo elecrónico: caritobotina97@gmail.com<br>Celular: 3502138183.</p>
-                        </div>
-                        <div class="col-md-6 "><img class="img-responsive" src="{% static 'team/William.jpg' %}" alt=""
-                                width="320" height="404" />
-                            <h6><a href="">William Zambrano</a></h6><span class="small small-md">Ingeniero de
-                                sistemas</span>
-                            <p>Correo elecrónico: djwoz1998@gmail.com<br>Celular: 3134526988.</p>
-                        </div>
-                    </div>
+                    <p>Niñera SOS obedece a la necesidad que tienen las familias que viven principalmente en el sector
+                        urbano de la ciudad de Pasto, de contar con un servicio confiable, ágil y oportuno de niñeras
+                        con experiencia certificada. Las estadísticas demuestran que el número de padres que necesitan
+                        este servicio está en aumento, esto se atribuye a que en muchos casos ambos padres trabajan o a
+                        la necesidad de los mismo de pasar un tiempo libre para disfrutar en pareja, o también
+                        compromisos sociales ineludibles y en menor proporción situaciones urgentes e inesperadas. </p>
+                    <p>
+                        Por otra parte, las personas que pueden prestar el servicio de cuidado no tienen una herramienta
+                        que visibilice y les garantice accesibilidad a las ofertas de trabajo.<br>
+                        Niñera SOS tiene claro que con los niños y las niñas hay que tener un especial cuidado debido a
+                        experiencias en la cuales personas inescrupulosas han sometido a los infantes a maltratos y
+                        abusos, por eso se ofrece como un espacio seguro para que los padres contraten su servicio
+                        basado en los estrictos criterios de verificación de la formación, experiencia laboral y
+                        certificaciones de las niñeras que van a laborar. Sumado a lo anterior, el usuario podrá
+                        realizar una calificación del servicio prestado, la cual será visible para los demás usuarios
+                        que deseen contratar.
+
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<section class="our-webcoderskull padding-lg">
+    <div class="container">
+        <div class="row heading heading-icon">
+            <h2>Nuestro Equipo</h2>
+        </div>
+        <ul class="row">
+            <li class="col-12 col-md-6 col-lg-3">
+                <div class="cnt-block equal-hight" style="height: 349px;">
+                    <figure><img src="{% static 'team/Giancarlo.jpg' %}" class="img-responsive" alt=""></figure>
+                    <h3>Giancarlo Rosero</h3>
+                    <p><b>Ingeniero de Sistemas</b></p>
+                    <ul class="follow-us clearfix">
+                        <li>Correo elecrónico: roserogiancarlo@gmail.com</li>
+                        <li>Celular: 3163965498.</li>
+                    </ul>
+                </div>
+            </li>
+            <li class="col-12 col-md-6 col-lg-3">
+                <div class="cnt-block equal-hight" style="height: 349px;">
+                    <figure><img src="{% static 'team/Mateo.jpg' %}" class="img-responsive" alt=""></figure>
+                    <h3>Mateo Luna</h3>
+                    <p><b>Ingeniero de Sistemas</b></p>
+                    <ul class="follow-us clearfix">
+                        <li>Correo elecrónico: mateolunaosorio@gmail.com</li>
+                        <li>Celular: 3046608453.</li>
+                    </ul>
+                </div>
+            </li>
+            <li class="col-12 col-md-6 col-lg-3">
+                <div class="cnt-block equal-hight" style="height: 349px;">
+                    <figure><img src="{% static 'team/William.jpg' %}" class="img-responsive" alt=""></figure>
+                    <h3>William Zambrano</h3>
+                    <p><b>Ingeniero de Sistemas</b></p>
+                    <ul class="follow-us clearfix">
+                        <li>Correo elecrónico: djwoz1998@gmail.com</li>
+                        <li>Celular: 3134526988.</li>
+                    </ul>
+                </div>
+            </li>
+            <li class="col-12 col-md-6 col-lg-3">
+                <div class="cnt-block equal-hight" style="height: 349px;">
+                    <figure><img src="{% static 'team/Carolina.jpg' %}" class="img-responsive" alt=""></figure>
+                    <h3>Carolina Botina</h3>
+                    <p><b>Ingeniera de Sistemas</b></p>
+                    <ul class="follow-us clearfix">
+                        <li>Correo elecrónico: caritobotina97@gmail.com</li>
+                        <li>Celular: 3502138183.</li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
 
 {% endblock content %}
